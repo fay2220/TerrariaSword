@@ -1,5 +1,11 @@
 {
   "item.starfury.starfury": "สตาร์ฟิวรี",
   "item.starfury.fallen_star": "ดาวตก",
-  "entity.starfury.fallen_star": "ดาวตก"
+  "item.starfury.zenith_sword": "ดาบเซนิธ",
+  "item.starfury.zenith_phantom_emerald": "ดาบวิญญาณ",
+  "item.starfury.zenith_phantom_ember": "ดาบวิญญาณ",
+  "item.starfury.zenith_phantom_rose": "ดาบวิญญาณ",
+  "item.starfury.zenith_phantom_azure": "ดาบวิญญาณ",
+  "entity.starfury.fallen_star": "ดาวตก",
+  "entity.starfury.zenith_blade": "ใบดาบเซนิธ"
 }

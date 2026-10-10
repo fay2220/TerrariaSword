@@ -18,4 +18,15 @@ public class ModEntities {
                             .clientTrackingRange(8)
                             .updateInterval(1)
                             .build(new ResourceLocation(StarfuryMod.MODID, "fallen_star").toString()));
+
+    /** One flying blade of the Zenith. Lives about 1 second, never saved to disk. */
+    public static final RegistryObject<EntityType<ZenithSwordEntity>> ZENITH_BLADE =
+            ENTITY_TYPES.register("zenith_blade", () ->
+                    EntityType.Builder.<ZenithSwordEntity>of(ZenithSwordEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(8)
+                            .updateInterval(1)
+                            .noSave()
+                            .fireImmune()
+                            .build(new ResourceLocation(StarfuryMod.MODID, "zenith_blade").toString()));
 }

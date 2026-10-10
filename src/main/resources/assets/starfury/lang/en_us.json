@@ -1,5 +1,11 @@
 {
   "item.starfury.starfury": "Starfury",
   "item.starfury.fallen_star": "Fallen Star",
-  "entity.starfury.fallen_star": "Fallen Star"
+  "item.starfury.zenith_sword": "Zenith Sword",
+  "item.starfury.zenith_phantom_emerald": "Spectral Blade",
+  "item.starfury.zenith_phantom_ember": "Spectral Blade",
+  "item.starfury.zenith_phantom_rose": "Spectral Blade",
+  "item.starfury.zenith_phantom_azure": "Spectral Blade",
+  "entity.starfury.fallen_star": "Fallen Star",
+  "entity.starfury.zenith_blade": "Zenith Blade"
 }

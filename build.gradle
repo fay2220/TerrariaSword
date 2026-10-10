@@ -48,6 +48,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    // Same repository GeckoLib itself publishes to (checked against the GeckoLib 1.20.1 branch build.gradle).
     maven {
         name = 'GeckoLib'
         url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -63,7 +64,17 @@ dependencies {
 
     // GeckoLib: animated 3D models (players must also put the GeckoLib jar in their mods folder)
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
-    implementation("com.eliotlash.mclib:mclib:20")
+    // mclib is bundled inside the real GeckoLib jar (jar-in-jar). Only needed here so `runClient` works in dev;
+    // minecraftLibrary (instead of implementation) puts it on the game's classpath correctly under ForgeGradle 6.
+    minecraftLibrary("com.eliotlash.mclib:mclib:20")
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    def props = [mod_version: mod_version]
+    inputs.properties props
+    filesMatching('META-INF/mods.toml') {
+        expand props
+    }
 }
 
 tasks.named('jar', Jar).configure {

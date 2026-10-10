@@ -4,12 +4,12 @@ license="MIT"
 
 [[mods]]
 modId="starfury"
-version="1.0.0"
+version="${mod_version}"
 displayName="Starfury"
 description='''
-Starfury sword from Terraria.
-Left click: normal sword hit (7 damage).
-Right click: summon 3-5 falling stars onto the spot you are aiming at (5 damage each).
+Terraria swords for Minecraft.
+Starfury - left click: 7 damage. Right click: summon 3-5 falling stars onto the spot you are aiming at (5 damage each).
+Zenith - left click: 25 damage. Hold right click: a storm of spectral swords loops out up to 20 blocks and back (20 damage per hit), with sonic booms.
 '''
 
 [[dependencies.starfury]]

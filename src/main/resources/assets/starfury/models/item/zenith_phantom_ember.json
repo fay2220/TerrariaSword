@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "starfury:item/zenith_phantom_ember"
+  }
+}

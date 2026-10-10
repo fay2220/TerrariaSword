@@ -71,6 +71,11 @@ public class ClientEffects {
         }
     }
 
+    /** Adds screen shake (used by other client effects, e.g. the Zenith sonic boom). */
+    public static void addShake(float power) {
+        shakePower = Math.min(MAX_SHAKE, shakePower + power);
+    }
+
     private static void ring(Level level, double x, double y, double z, int points, double speed, ParticleOptions type) {
         for (int i = 0; i < points; i++) {
             double a = (Math.PI * 2.0D) * i / points;

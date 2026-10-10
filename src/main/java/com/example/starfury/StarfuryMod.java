@@ -22,6 +22,7 @@ public class StarfuryMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.STARFURY);
+            event.accept(ModItems.ZENITH_SWORD);
         }
     }
 }
