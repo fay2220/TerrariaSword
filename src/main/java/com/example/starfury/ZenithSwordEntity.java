@@ -44,7 +44,7 @@ public class ZenithSwordEntity extends Projectile {
     /** Damage per hit. With 5 blades per second each target can be hit about 5 times per second. */
     public static final float DAMAGE = 20.0F;
     /** Maximum distance (blocks) from the player to the turn point. */
-    public static final double RANGE = 20.0D;
+    public static final double RANGE = 25.0D;
     /** Ticks for a full out-and-back trip (20 ticks = 1 second). */
     public static final int FLIGHT_TICKS = 20;
     /** Extra reach around the blade for hit detection (blocks). */

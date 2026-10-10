@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = StarfuryMod.MODID, value = Dist.CLIENT)
 public class ZenithClientEffects {
     /** Set to false to turn off the white/black full-screen flash (speed lines stay). */
-    public static final boolean ENABLE_SCREEN_FLASH = true;
+    public static final boolean ENABLE_SCREEN_FLASH = false;
     private static final int FLASH_TICKS = 4;
     private static final int SPEED_LINE_TICKS = 10;
     private static final int SPEED_LINES = 42;
@@ -63,7 +63,7 @@ public class ZenithClientEffects {
         Vec3[] basis = basis(look);
 
         // small puff for every blade
-        ring(level, eye.add(look.scale(1.3D)), look, basis, 0.35D, 8, ParticleTypes.CLOUD, 0.06D, 0.12D);
+        // ring(level, eye.add(look.scale(1.3D)), look, basis, 0.35D, 8, ParticleTypes.CLOUD, 0.06D, 0.12D);
 
         if (!big) {
             return;
@@ -71,10 +71,10 @@ public class ZenithClientEffects {
 
         // vapor cone: stacked rings of cloud that widen with distance, like a jet breaking the sound barrier
         for (int i = 0; i < 4; i++) {
-            double dist = 1.6D + i * 0.8D;
-            double radius = 0.6D + i * 0.45D;
-            ring(level, eye.add(look.scale(dist)), look, basis, radius, 22 + i * 6, ParticleTypes.CLOUD,
-                    0.10D + i * 0.03D, 0.30D);
+            // double dist = 1.6D + i * 0.8D;
+            // double radius = 0.6D + i * 0.45D;
+            // ring(level, eye.add(look.scale(dist)), look, basis, radius, 22 + i * 6, ParticleTypes.CLOUD,
+            //         0.10D + i * 0.03D, 0.30D);
         }
         // fast expanding shockwave rings
         ring(level, eye.add(look.scale(2.2D)), look, basis, 0.25D, 48, ParticleTypes.END_ROD, 0.55D, 0.05D);
@@ -101,7 +101,7 @@ public class ZenithClientEffects {
             return;
         }
         if (me == owner) {
-            speedLineTicks = SPEED_LINE_TICKS;
+            // speedLineTicks = SPEED_LINE_TICKS;
             speedLineSeed = rnd.nextLong();
             fovPunch = FOV_PUNCH;
             ClientEffects.addShake(flash ? 0.9F : 0.45F);

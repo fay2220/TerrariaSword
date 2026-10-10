@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
  * Zenith (Terraria).
  * Left click: normal sword hit, 25 damage.
  * Hold right click: launches a spectral blade every {@link #LAUNCH_INTERVAL} ticks (5 per second). Each blade loops
- * out up to 20 blocks toward where the player is looking and back in 1 second, hitting everything on its path for
+ * out up to 25 blocks toward where the player is looking and back in 1 second, hitting everything on its path for
  * {@link ZenithSwordEntity#DAMAGE}. No cooldown: keeps going until right click is released.
  */
 public class ZenithSwordItem extends SwordItem {
@@ -70,6 +70,17 @@ public class ZenithSwordItem extends SwordItem {
                 SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 0.45F, pitch + 0.2F);
         if (used % (LAUNCH_INTERVAL * 2) == 0) {
             user.swing(user.getUsedItemHand(), true); // arm keeps swinging while the storm is going
+        }
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, net.minecraft.world.entity.Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide && entity instanceof Player player) {
+            // Apply Night Vision if held in main hand or offhand (acts like the sword emits light)
+            if (player.getMainHandItem() == stack || player.getOffhandItem() == stack) {
+                player.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                        net.minecraft.world.effect.MobEffects.NIGHT_VISION, 220, 0, false, false, false));
+            }
         }
     }
 }
