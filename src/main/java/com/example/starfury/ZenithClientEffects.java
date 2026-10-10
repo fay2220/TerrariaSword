@@ -88,7 +88,7 @@ public class ZenithClientEffects {
         double maxDist = wall.getType() == HitResult.Type.MISS ? BOOM_LINE_LENGTH : wall.getLocation().distanceTo(eye);
         for (double d = 2.0D; d < maxDist; d += 1.6D) {
             Vec3 p = eye.add(look.scale(d));
-            level.addParticle(ParticleTypes.SONIC_BOOM, p.x, p.y, p.z, 0.0D, 0.0D, 0.0D);
+            // level.addParticle(ParticleTypes.SONIC_BOOM, p.x, p.y, p.z, 0.0D, 0.0D, 0.0D);
             if (rnd.nextBoolean()) {
                 level.addParticle(ParticleTypes.END_ROD, p.x, p.y, p.z,
                         look.x * 0.4D + rnd.nextGaussian() * 0.05D, look.y * 0.4D + rnd.nextGaussian() * 0.05D,
@@ -137,7 +137,7 @@ public class ZenithClientEffects {
         dir = dir.lengthSqr() > 1.0E-6D ? dir.normalize() : new Vec3(0.0D, 0.0D, 1.0D);
         Vec3[] basis = basis(dir);
 
-        level.addParticle(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
+        // level.addParticle(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
         ring(level, pos, dir, basis, 0.3D, 16, ParticleTypes.CLOUD, 0.22D, 0.0D);
         ring(level, pos, dir, basis, 0.2D, 20, ParticleTypes.END_ROD, 0.35D, 0.0D);
         for (int i = 0; i < 8; i++) {

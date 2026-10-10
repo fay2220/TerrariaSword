@@ -68,11 +68,6 @@ public class ZenithSwordItem extends SwordItem {
                 SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 0.55F, pitch);
         serverLevel.playSound(null, user.getX(), user.getY(), user.getZ(),
                 SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 0.45F, pitch + 0.2F);
-        if (bigBoom) {
-            serverLevel.playSound(null, user.getX(), user.getY(), user.getZ(),
-                    SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, firstBoom ? 1.6F : 0.9F,
-                    1.05F + serverLevel.random.nextFloat() * 0.2F);
-        }
         if (used % (LAUNCH_INTERVAL * 2) == 0) {
             user.swing(user.getUsedItemHand(), true); // arm keeps swinging while the storm is going
         }
