@@ -77,10 +77,10 @@ public class ZenithClientEffects {
             //         0.10D + i * 0.03D, 0.30D);
         }
         // fast expanding shockwave rings
-        ring(level, eye.add(look.scale(2.2D)), look, basis, 0.25D, 48, ParticleTypes.END_ROD, 0.55D, 0.05D);
-        ring(level, eye.add(look.scale(3.0D)), look, basis, 0.25D, 36, ParticleTypes.ELECTRIC_SPARK, 0.80D, 0.05D);
-        level.addParticle(ParticleTypes.FLASH, eye.x + look.x * 2.5D, eye.y + look.y * 2.5D, eye.z + look.z * 2.5D,
-                0.0D, 0.0D, 0.0D);
+        // ring(level, eye.add(look.scale(2.2D)), look, basis, 0.25D, 48, ParticleTypes.END_ROD, 0.55D, 0.05D);
+        // ring(level, eye.add(look.scale(3.0D)), look, basis, 0.25D, 36, ParticleTypes.ELECTRIC_SPARK, 0.80D, 0.05D);
+        // level.addParticle(ParticleTypes.FLASH, eye.x + look.x * 2.5D, eye.y + look.y * 2.5D, eye.z + look.z * 2.5D,
+        //         0.0D, 0.0D, 0.0D);
 
         // sonic boom line toward where the player faces (stops at the first wall)
         Vec3 end = eye.add(look.scale(BOOM_LINE_LENGTH));
@@ -90,9 +90,9 @@ public class ZenithClientEffects {
             Vec3 p = eye.add(look.scale(d));
             // level.addParticle(ParticleTypes.SONIC_BOOM, p.x, p.y, p.z, 0.0D, 0.0D, 0.0D);
             if (rnd.nextBoolean()) {
-                level.addParticle(ParticleTypes.END_ROD, p.x, p.y, p.z,
-                        look.x * 0.4D + rnd.nextGaussian() * 0.05D, look.y * 0.4D + rnd.nextGaussian() * 0.05D,
-                        look.z * 0.4D + rnd.nextGaussian() * 0.05D);
+                // level.addParticle(ParticleTypes.END_ROD, p.x, p.y, p.z,
+                //         look.x * 0.4D + rnd.nextGaussian() * 0.05D, look.y * 0.4D + rnd.nextGaussian() * 0.05D,
+                //         look.z * 0.4D + rnd.nextGaussian() * 0.05D);
             }
         }
 
@@ -102,15 +102,15 @@ public class ZenithClientEffects {
         }
         if (me == owner) {
             // speedLineTicks = SPEED_LINE_TICKS;
-            speedLineSeed = rnd.nextLong();
-            fovPunch = FOV_PUNCH;
-            ClientEffects.addShake(flash ? 0.9F : 0.45F);
-            if (flash && ENABLE_SCREEN_FLASH) {
-                flashTicks = FLASH_TICKS;
-            }
+            // speedLineSeed = rnd.nextLong();
+            // fovPunch = FOV_PUNCH;
+            // ClientEffects.addShake(flash ? 0.9F : 0.45F);
+            // if (flash && ENABLE_SCREEN_FLASH) {
+            //     flashTicks = FLASH_TICKS;
+            // }
         } else {
-            double dist = Math.sqrt(me.distanceToSqr(owner));
-            ClientEffects.addShake((float) Math.max(0.0D, 1.0D - dist / 24.0D) * 0.5F);
+            // double dist = Math.sqrt(me.distanceToSqr(owner));
+            // ClientEffects.addShake((float) Math.max(0.0D, 1.0D - dist / 24.0D) * 0.5F);
         }
     }
 
@@ -121,14 +121,14 @@ public class ZenithClientEffects {
         Vec3 pos = blade.position();
 
         if (wall) {
-            for (int i = 0; i < 18; i++) {
-                level.addParticle(ParticleTypes.ELECTRIC_SPARK, pos.x, pos.y, pos.z,
-                        rnd.nextGaussian() * 0.3D, rnd.nextGaussian() * 0.3D, rnd.nextGaussian() * 0.3D);
-            }
-            for (int i = 0; i < 10; i++) {
-                level.addParticle(ParticleTypes.CRIT, pos.x, pos.y, pos.z,
-                        rnd.nextGaussian() * 0.4D, rnd.nextGaussian() * 0.4D, rnd.nextGaussian() * 0.4D);
-            }
+            // for (int i = 0; i < 18; i++) {
+            //     level.addParticle(ParticleTypes.ELECTRIC_SPARK, pos.x, pos.y, pos.z,
+            //             rnd.nextGaussian() * 0.3D, rnd.nextGaussian() * 0.3D, rnd.nextGaussian() * 0.3D);
+            // }
+            // for (int i = 0; i < 10; i++) {
+            //     level.addParticle(ParticleTypes.CRIT, pos.x, pos.y, pos.z,
+            //             rnd.nextGaussian() * 0.4D, rnd.nextGaussian() * 0.4D, rnd.nextGaussian() * 0.4D);
+            // }
             return;
         }
 
@@ -138,12 +138,12 @@ public class ZenithClientEffects {
         Vec3[] basis = basis(dir);
 
         // level.addParticle(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
-        ring(level, pos, dir, basis, 0.3D, 16, ParticleTypes.CLOUD, 0.22D, 0.0D);
-        ring(level, pos, dir, basis, 0.2D, 20, ParticleTypes.END_ROD, 0.35D, 0.0D);
-        for (int i = 0; i < 8; i++) {
-            level.addParticle(ParticleTypes.FIREWORK, pos.x, pos.y, pos.z,
-                    rnd.nextGaussian() * 0.15D, rnd.nextGaussian() * 0.15D, rnd.nextGaussian() * 0.15D);
-        }
+        // ring(level, pos, dir, basis, 0.3D, 16, ParticleTypes.CLOUD, 0.22D, 0.0D);
+        // ring(level, pos, dir, basis, 0.2D, 20, ParticleTypes.END_ROD, 0.35D, 0.0D);
+        // for (int i = 0; i < 8; i++) {
+        //     level.addParticle(ParticleTypes.FIREWORK, pos.x, pos.y, pos.z,
+        //             rnd.nextGaussian() * 0.15D, rnd.nextGaussian() * 0.15D, rnd.nextGaussian() * 0.15D);
+        // }
         level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS,
                 0.35F, 1.6F + rnd.nextFloat() * 0.3F, false);
     }

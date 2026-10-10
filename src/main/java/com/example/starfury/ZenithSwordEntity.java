@@ -48,7 +48,7 @@ public class ZenithSwordEntity extends Projectile {
     /** Ticks for a full out-and-back trip (20 ticks = 1 second). */
     public static final int FLIGHT_TICKS = 20;
     /** Extra reach around the blade for hit detection (blocks). */
-    private static final double HIT_RADIUS = 0.7D;
+    private static final double HIT_RADIUS = 1.5D;
     /** Speed (blocks/tick) when a blade that bumped into a wall flies straight back. */
     private static final double RETURN_SPEED = 2.6D;
     private static final double MIN_LENGTH = 1.5D;
