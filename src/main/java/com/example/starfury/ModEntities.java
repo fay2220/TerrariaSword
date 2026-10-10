@@ -16,6 +16,6 @@ public class ModEntities {
                     EntityType.Builder.<FallenStarEntity>of(FallenStarEntity::new, MobCategory.MISC)
                             .sized(0.5F, 0.5F)
                             .clientTrackingRange(8)
-                            .updateInterval(2)
+                            .updateInterval(1)
                             .build(new ResourceLocation(StarfuryMod.MODID, "fallen_star").toString()));
 }

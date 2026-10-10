@@ -20,6 +20,13 @@ Right click: summon 3-5 falling stars onto the spot you are aiming at (5 damage 
     side="BOTH"
 
 [[dependencies.starfury]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[4.7,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.starfury]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.20.1,1.21)"

@@ -1,5 +1,7 @@
 package com.example.starfury;
 
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -22,13 +24,19 @@ import net.minecraft.world.phys.Vec3;
 public class StarfurySwordItem extends SwordItem {
     private static final double RANGE = 60.0D;          // how far the crosshair can target
     private static final int COOLDOWN_TICKS = 20;       // right-click cooldown (20 ticks = 1 s)
-    private static final double SPAWN_HEIGHT_MIN = 18.0D;
-    private static final double SPAWN_HEIGHT_VAR = 6.0D;
+    private static final double SPAWN_HEIGHT_MIN = 20.0D;
+    private static final double SPAWN_HEIGHT_VAR = 14.0D; // varied heights make the stars land one after another
     private static final double SPAWN_SPREAD = 10.0D;   // horizontal spread of spawn points
     private static final double LANDING_SPREAD = 1.0D;  // spread of landing points around crosshair
 
     public StarfurySwordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
+    }
+
+    /** Enchanted-looking shimmer on the sword. */
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return true;
     }
 
     @Override
@@ -41,6 +49,19 @@ public class StarfurySwordItem extends SwordItem {
 
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.EVOKER_CAST_SPELL, SoundSource.PLAYERS, 0.8F, 1.6F);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.PLAYERS, 1.2F, 1.1F);
+
+            if (level instanceof ServerLevel serverLevel) {
+                // glowing target zone on the ground where the stars will land
+                serverLevel.sendParticles(ParticleTypes.END_ROD, target.x, target.y + 0.1D, target.z,
+                        45, 1.3D, 0.05D, 1.3D, 0.0D);
+                serverLevel.sendParticles(ParticleTypes.ENCHANT, target.x, target.y + 0.5D, target.z,
+                        40, 1.2D, 0.6D, 1.2D, 0.8D);
+                // sparks swirling around the player's hand
+                serverLevel.sendParticles(ParticleTypes.ENCHANTED_HIT, player.getX(), player.getY(0.7D), player.getZ(),
+                        20, 0.5D, 0.6D, 0.5D, 0.3D);
+            }
             stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
         }
 
@@ -102,8 +123,14 @@ public class StarfurySwordItem extends SwordItem {
 
             FallenStarEntity star = new FallenStarEntity(level, player);
             star.setPos(spawn.x, spawn.y, spawn.z);
-            star.setDeltaMovement(dir.normalize().scale(1.4D + rnd.nextDouble() * 0.4D));
+            star.setDeltaMovement(dir.normalize().scale(1.5D + rnd.nextDouble() * 0.5D));
             level.addFreshEntity(star);
+
+            // flash in the sky where each star appears
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.sendParticles(ParticleTypes.FLASH, spawn.x, spawn.y, spawn.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                serverLevel.sendParticles(ParticleTypes.END_ROD, spawn.x, spawn.y, spawn.z, 18, 0.4D, 0.4D, 0.4D, 0.12D);
+            }
         }
     }
 }
