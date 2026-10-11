@@ -30,9 +30,9 @@ import org.joml.Matrix4f;
  * additive light ribbon along its recent path.
  */
 public class ZenithSwordRenderer extends EntityRenderer<ZenithSwordEntity> {
-    private static final float SCALE = 1.9F;
-    private static final int AFTERIMAGES = 4;
-    private static final float RIBBON_WIDTH = 0.32F;
+    private static final float SCALE = 2.1F;
+    private static final int AFTERIMAGES = 5;
+    private static final float RIBBON_WIDTH = 0.40F;
 
     private static final RenderType GLOW = RenderType.entityTranslucentEmissive(InventoryMenu.BLOCK_ATLAS);
 
@@ -76,17 +76,19 @@ public class ZenithSwordRenderer extends EntityRenderer<ZenithSwordEntity> {
         renderRibbon(entity, pos, poseStack, buffers, color);
 
         BakedModel model = this.itemRenderer.getModel(stack, entity.level(), null, entity.getId());
-        // NOTE: always fetch a VertexConsumer right before using it; asking the buffer source for another
-        // render type can finish the previous batch, so a consumer must not be kept across other getBuffer calls.
         VertexConsumer glow = buffers.getBuffer(GLOW);
 
-        // afterimages: fading, slightly smaller copies trailing behind the blade
+        // Furious spinning animation around the cutting plane
+        float spin = (entity.tickCount + partialTick) * 60.0F + entity.getId() * 45.0F;
+
+        // afterimages: fading, slightly smaller copies trailing behind the high-speed blade
         for (int i = AFTERIMAGES; i >= 1; i--) {
             float fade = 1.0F - i / (float) (AFTERIMAGES + 1);
             poseStack.pushPose();
-            Vec3 back = motion.scale(-0.22D * i);
+            Vec3 back = motion.scale(-0.16D * i);
             poseStack.translate(back.x, back.y, back.z);
             orient(poseStack, yaw, pitch);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(spin - i * 28.0F));
             float s = SCALE * (1.0F - 0.05F * i);
             poseStack.scale(s, s, s);
             poseStack.translate(-0.5F, -0.5F, -0.5F);
@@ -97,6 +99,7 @@ public class ZenithSwordRenderer extends EntityRenderer<ZenithSwordEntity> {
         // the blade itself
         poseStack.pushPose();
         orient(poseStack, yaw, pitch);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(spin));
         poseStack.scale(SCALE, SCALE, SCALE);
         this.itemRenderer.renderStatic(stack, ItemDisplayContext.NONE, LightTexture.FULL_BRIGHT,
                 OverlayTexture.NO_OVERLAY, poseStack, buffers, entity.level(), entity.getId());
